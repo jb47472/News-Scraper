@@ -28,40 +28,40 @@ app.use(express.static("public"));
 
 // A GET route for scraping the NY Times website
 app.get("/scrape", function (req, res) {
-    
-    axios.get("https://www.nytimes.com/").then(function (response) {
-        //    load that into cheerio and save it to $ for a shorthand selector
-        var $ = cheerio.load(response.data);
-        // console.log(response.data);
-        
 
-    $(".css-1ez5fsm").each(function(i, element) {
-        // Save an empty result object
-        var result = {};
-        // console.log(element);
-        
-        
+  axios.get("https://www.nytimes.com/").then(function (response) {
+    //    load that into cheerio and save it to $ for a shorthand selector
+    var $ = cheerio.load(response.data);
+    // console.log(response.data);
+
+
+    $(".css-1ez5fsm").each(function (i, element) {
+      // Save an empty result object
+      var result = {};
+
       // Add the text and href of every link, and save them as properties of the result object
       result.title = $(this)
         .children("h2")
-        // .children("span")
         .text();
-        console.log(result.title);
-        
-    //   result.link = $(this)
-    //     .children("a")
-    //     .attr("href");
+      result.link = $(this)
+        .parent("a")
+        .attr("href");
+      // result.summary =$(this).children("h2").children("ul").children("li").text();
+      console.log(result.title);
+      console.log(result.link);
+      // console.log(result.summary);
+      
 
       // Create a new Article using the `result` object built from scraping
-    //   db.Article.create(result)
-    //     .then(function(dbArticle) {
-    //       // View the added result in the console
-    //       console.log(dbArticle);
-    //     })
-    //     .catch(function(err) {
-    //       // If an error occurred, log it
-    //       console.log(err);
-    //     });
+        // db.Article.create(result)
+        //   .then(function(dbArticle) {
+        //     // View the added result in the console
+        //     console.log(dbArticle);
+        //   })
+        //   .catch(function(err) {
+        //     // If an error occurred, log it
+        //     console.log(err);
+        //   });
     });
 
     // Send a message to the client
@@ -75,7 +75,7 @@ app.get("/scrape", function (req, res) {
 
 // Start the server
 app.listen(PORT, function () {
-    console.log("App running on port " + PORT + "!");
+  console.log("App running on port " + PORT + "!");
 });
 
 

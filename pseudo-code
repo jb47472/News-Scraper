@@ -1,0 +1,9 @@
+Lots of issues with this homework, I got off to a good start and then hit a wall.
+
+The scraper is working and logging back information, here is a list of things needed to finish the homework asssigment.
+
+Have the button generate the information on the html page.
+Use mongoose to manage the relationships between the database and schema in my code. 
+Use mongoose to create an article and note div in my html.
+Add a delete button for the user to delete comments which would cleat the database.
+And of course style the html...which definitley isn't my strong suit.
